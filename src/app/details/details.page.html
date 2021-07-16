@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      My Notes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding >
+
+  <ion-fab vertical="bottom"  slot="fixed">
+    <ion-fab-button routerLink="/home">
+      <ion-icon name="return-up-back-outline"></ion-icon>
+    </ion-fab-button>
+    </ion-fab>
+  
+      <ion-grid>
+    
+        <ion-row *ngFor="let y of photoservice.highlights" >
+
+          <ion-card *ngIf="y">
+            <ion-card-content (click)="go(y)">
+              {{ y }} 
+            </ion-card-content>
+          </ion-card>
+
+      
+    
+        
+        </ion-row>
+      
+      </ion-grid>
+    
+
+
+
+  <ion-button (click)="destroy()">Clear All</ion-button>
+
+  
+</ion-content>

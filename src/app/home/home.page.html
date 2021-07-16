@@ -1,24 +1,93 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Photo Gallery</ion-title>
+    <ion-title>
+        Smart Notes
+    </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+    <ion-col size="6" *ngFor="let photo of photoservice.photos; index as position">
+      <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)"></ion-img>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>  
+<ion-content padding>
+<ion-grid>
 
-<ion-content>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title>Photo Gallery</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
-<ion-content>
+ 
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+        </ion-col>
+        <ion-col>
+          <ion-spinner *ngIf="Spinner" name="dots"></ion-spinner>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <!-- <ion-textarea id = "inpp"></ion-textarea>  -->
+    <div  *ngIf="highLightFlag == false" >
+      <!-- <p > -->
+        <h2 *ngIf="showOnScreen" style="background-color:chartreuse;">Edit ?? </h2>
+      <!-- </p> -->
+      <ion-textarea *ngIf="showOnScreen"  [(ngModel)]="showOnScreen"
+        id="input" autoGrow = true></ion-textarea>
+    </div>
+
+        <h2  *ngIf="highLightFlag" style="background-color:chartreuse;">Select the text you want to highlight 
+        </h2>
+          <h4 *ngIf="highLightFlag">
+            {{ showOnScreen }}
+          </h4>
+
+          <ion-button *ngIf="highLightFlag" (click)="Highlight_Done()">Save</ion-button>
+         
+
+     
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngIf="highLightFlag == false" >
+            <ion-button *ngIf="showOnScreen" (click) = "saveText()">Save Edits</ion-button>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- <ion-button (click)="cliked()">Value </ion-button> -->
+
+      <!-- <ion-grid *ngIf="loadingDone">
+        here is the loaded
+        {{ texts_array[1] }}
+      </ion-grid> -->
+      
+
+
+
+
+
+
+
+  </ion-grid>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="addPhotoToGallery()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-tab-button tab="tab2">
-    <ion-icon name="images"></ion-icon>
-    <ion-label>Photos</ion-label>
-  </ion-tab-button>
-</ion-content>
+  <ion-fab vertical="bottom"  slot="fixed">
+  <ion-fab-button routerLink="details">
+  <ion-icon name="document-text-outline"></ion-icon>
+  </ion-fab-button>
+  </ion-fab>
+  </ion-content>  
+     
